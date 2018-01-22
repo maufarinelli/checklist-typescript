@@ -1,0 +1,20 @@
+@import '../../styles/variables.css';
+
+.checkbox-input {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--border-color);
+
+	& :last-child {
+		border-bottom: none;
+	}
+
+	& .form-check-label {
+		margin-top: 5px;
+	}
+
+	& .form-check-input {
+		margin-right: 3px;
+		vertical-align: top;
+	}
+}

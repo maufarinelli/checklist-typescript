@@ -1,0 +1,11 @@
+@import '../../../styles/variables.css';
+
+.checklist-title {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--title-color);
+
+    &.no-title {
+        opacity: 0.3;
+    }
+}

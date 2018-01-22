@@ -1,0 +1,15 @@
+@import '../../styles/variables.css';
+
+.all-checklists-link {
+    display: block;
+
+    & :hover {
+        background-color: var(--active-button-bg);
+        color: var(--active-button-text);
+    }
+
+    & :active {
+          background-color: var(--active-button-bg);
+          color: var(--active-button-text);
+    }
+}
