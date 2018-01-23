@@ -21,7 +21,7 @@ interface TextInputState {
 	checked?: boolean
 }
 
-export class TextInput extends React.Component<TextInputState, TextInputProps> {
+export class TextInput extends React.Component<TextInputProps, TextInputState> {
 	constructor(props: TextInputProps) {
 		super(props);
 
@@ -39,15 +39,15 @@ export class TextInput extends React.Component<TextInputState, TextInputProps> {
 	
 	handleChange(event: React.FormEvent<HTMLInputElement>): void {
 		this.setState({
-			id: this.props.id === 'checklist-title' ? this.props.id : _.uniqueId(event.target.value + '_'),
-			name: event.target.value,
-			value: event.target.value,
-			label: event.target.value.substring(0, 1).toUpperCase() + event.target.value.substring(1),
+			id: this.props.id === 'checklist-title' ? this.props.id : _.uniqueId(event.currentTarget.value + '_'),
+			name: event.currentTarget.value,
+			value: event.currentTarget.value,
+			label: event.currentTarget.value.substring(0, 1).toUpperCase() + event.currentTarget.value.substring(1),
 			checked: false
 		});
 	}
 
-	handleKeyPress(event: React.FormEvent<HTMLInputElement>): void {
+	handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>): void {
 		if (event.key === 'Enter') {
 			event.preventDefault();
 

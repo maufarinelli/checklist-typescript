@@ -26,7 +26,7 @@ class ChecklistItem extends React.Component<ChecklistItemProps, ChecklistItemSta
     }
 
     hendleCheckboxChange(event: React.FormEvent<HTMLInputElement>) {
-        const value: boolean = event.target.checked;
+        const value: boolean = event.currentTarget.checked;
 
         this.props.onCheckboxChange(event);
 

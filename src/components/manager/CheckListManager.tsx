@@ -22,14 +22,17 @@ interface checklistProps extends RouteComponentProps<any>{
 	}
 }
 
-interface checklistStateModel extends Array<checklistModel> {
-}
+interface checklistStateModel extends Array<checklistModel> {}
 
 interface HTMLButtonElementModel extends HTMLButtonElement {
 	id: string
 }
 
-export class CheckListManager extends React.Component<any, any> {
+interface DefaultChecklistModel extends checklistModel {
+	isNew: boolean
+}
+
+export class CheckListManager extends React.Component<checklistProps, any> {
 	constructor(props: checklistProps) {
 		super(props);
 
@@ -139,7 +142,7 @@ function getNextId(checklists: checklistStateModel): number {
 function mapStateToProps(state: stateModel, ownProps: checklistProps): {checklist: checklistModel, newChecklistId?: number} {
 	const checklistId = parseInt(ownProps.match.params.id, 10);
 	let newChecklistId,
-		defaultChecklist = {
+		defaultChecklist: DefaultChecklistModel = {
 			id: 1,
 			title: '',
 			items: [],
