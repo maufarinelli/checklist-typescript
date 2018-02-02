@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import Header from '../common/header/Header';
 import Main from '../main/Main';
 
-class App extends React.Component<RouteComponentProps<any>, any> {
+interface Props extends RouteComponentProps<any> {}
+
+class App extends React.Component<Props, object> {
     render() {
         return(
             <div className="container-fluid">
@@ -17,6 +19,13 @@ class App extends React.Component<RouteComponentProps<any>, any> {
     }
 }
 
+export function mergeProps(stateProps: void, dispatchProps: void, ownProps: object): object {
+    return Object.assign({}, ownProps, stateProps, dispatchProps);
+}
+
+const mapStateToProps = () => {};
+const mapDispatchToProps = () => {};
+
 export default withRouter(
-    connect()(App)
+    connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)
 );

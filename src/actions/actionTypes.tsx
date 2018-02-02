@@ -1,6 +1,8 @@
+import { checklistModel } from '../interfaces';
+
 export interface actions {
     type: string;
-    payload: checklist[] | checklist;
+    payload: checklistModel[] | checklistModel;
 }
 
 export const LOAD_CHECKLISTS_SUCCESS: string = 'LOAD_CHECKLISTS_SUCCESS';

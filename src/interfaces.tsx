@@ -1,23 +1,18 @@
 export interface checklistModel {
     id: number;
     title: string;
-    items:{
-        id: string,
-        name: string,
-        value: string,
-        label: string,
-        checked: boolean
-    }[]
+    isNew?: boolean;
+    items: checklistItemModel[]
 }
 
 export interface stateModel {
-    checklists: checklistModel[] | []
+    checklists: checklistModel[];
 }
 
 export interface checklistItemModel {
-    id: string,
-    name: string,
-    value: string,
-    label: string,
-    checked: boolean
+    id: string;
+    name: string;
+    value: string;
+    label: string;
+    checked: boolean;
 }

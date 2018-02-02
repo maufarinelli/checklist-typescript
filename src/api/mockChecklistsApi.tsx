@@ -1,36 +1,30 @@
 import _ from 'lodash';
+import { checklistModel } from '../interfaces';
 
 const delay: number = 300;
-interface checklist {
-    id: number;
-    title: string;
-    items:{
-        id: string,
-        name: string,
-        label: string,
-        checked: boolean
-    }[]
-}
 
-let allChecklists: checklist[] = [
+let allChecklists: checklistModel[] = [
     {
         id: 1,
         title: 'Title 1',
         items: [{
             id: '1',
             name: 'test',
+            value: 'test',
             label: 'Test',
             checked: true
         },
         {
             id: '2',
             name: 'test2',
+            value: 'test2',
             label: 'Test2',
             checked: false
         },
         {
             id: '3',
             name: 'test3',
+            value: 'test3',
             label: 'Test3',
             checked: true
         }]
@@ -41,18 +35,21 @@ let allChecklists: checklist[] = [
         items: [{
             id: '1',
             name: 'test',
+            value: 'test',
             label: 'Test',
             checked: false
         },
         {
             id: '2',
             name: 'test2',
+            value: 'test2',
             label: 'Test2',
             checked: true
         },
         {
             id: '3',
             name: 'test3',
+            value: 'test3',
             label: 'Test3',
             checked: false
         }]
@@ -63,18 +60,21 @@ let allChecklists: checklist[] = [
         items: [{
             id: '1',
             name: 'test',
+            value: 'test',
             label: 'Test',
             checked: true
         },
         {
             id: '2',
             name: 'test2',
+            value: 'test2',
             label: 'Test2',
             checked: true
         },
         {
             id: '3',
             name: 'test3',
+            value: 'test3',
             label: 'Test3',
             checked: false
         }]
@@ -90,7 +90,7 @@ export class ChecklistsApi {
         });
     }
 
-    static saveChecklist(checklist) {
+    static saveChecklist(checklist: checklistModel) {
         checklist = Object.assign({}, checklist); // to avoid manipulating object passed in.
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -102,7 +102,8 @@ export class ChecklistsApi {
                     //Just simulating creation here.
                     //The server would generate ids and watchHref's for new courses in a real app.
                     //Cloning so copy returned is passed by value rather than by reference.
-                    checklist.id = _.uniqueId();
+                    checklist.id = parseInt(_.uniqueId(), 10);
+
                     //checklist.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
                     allChecklists.push(checklist);
                 }
