@@ -1,8 +1,6 @@
-import _ from 'lodash';
 import { checklistModel } from '../interfaces';
 
 const delay: number = 300;
-
 let allChecklists: checklistModel[] = [
     {
         id: 1,
@@ -85,7 +83,7 @@ export class ChecklistsApi {
     static getAllCourses() {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(Object.assign([], allChecklists));
+                resolve(allChecklists);
             }, delay);
         });
     }
@@ -97,15 +95,6 @@ export class ChecklistsApi {
                 if (checklist.id) {
                     const existingChecklistIndex = allChecklists.findIndex(a => a.id === checklist.id);
                     allChecklists.splice(existingChecklistIndex, 1, checklist);
-                }
-                else {
-                    //Just simulating creation here.
-                    //The server would generate ids and watchHref's for new courses in a real app.
-                    //Cloning so copy returned is passed by value rather than by reference.
-                    checklist.id = parseInt(_.uniqueId(), 10);
-
-                    //checklist.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-                    allChecklists.push(checklist);
                 }
                 resolve(checklist);
             }, delay);

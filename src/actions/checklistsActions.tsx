@@ -1,16 +1,17 @@
 import * as types from './actionTypes';
-import {ChecklistsApi} from '../api/mockChecklistsApi';
+import { ChecklistsApi } from '../api/mockChecklistsApi';
 import { checklistModel } from '../interfaces';
+//import { Dispatch } from 'redux';
 
-export function loadChecklistsSuccess(checklists: checklistModel[]) {
+export function loadChecklistsSuccess(checklists: checklistModel[] | {}) {
 	return {type: types.LOAD_CHECKLISTS_SUCCESS, payload: checklists};
 }
 
-export function createChecklistSuccess(checklist: checklistModel) {
+export function createChecklistSuccess(checklist: any) {
 	return {type: types.CREATE_CHECKLIST_SUCCESS, payload: checklist};
 }
 
-export function updateChecklistSuccess(checklist: checklistModel) {
+export function updateChecklistSuccess(checklist: any) {
 	return {type: types.UPDATE_CHECKLIST_SUCCESS, payload: checklist};
 }
 
@@ -24,13 +25,14 @@ export function loadChecklists() {
 	};
 }
 
-export function saveChecklist(checklist): Promise<object> {
-	return function(dispatch, getState) {
+export function saveChecklist(checklist: any): any {
+	return function dispatchSaveChecklist(dispatch: any): any {
 		return ChecklistsApi.saveChecklist(checklist)
 			.then(savedChecklist => {
-				!checklist.isNew ? dispatch(updateChecklistSuccess(savedChecklist)) : dispatch(createChecklistSuccess(savedChecklist));
+				!checklist.isNew ?
+					dispatch(updateChecklistSuccess(savedChecklist)) :
+					dispatch(createChecklistSuccess(savedChecklist));
 			}).catch(error => {
-				//dispatch(ajaxCallError(error));
 				throw(error);
 			});
 	};

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {RouteComponentProps} from 'react-router';	
 import {withRouter} from 'react-router-dom';
 import {bindActionCreators, Dispatch} from 'redux';
-import {saveChecklist} from '../../actions/checklistsActions';
+import { saveChecklist } from '../../actions/checklistsActions';
 import ListForm from './ListForm';
 import {stateModel, checklistModel, checklistItemModel} from '../../interfaces';
 
@@ -26,10 +26,6 @@ interface checklistStateModel extends Array<checklistModel> {}
 
 interface HTMLButtonElementModel extends HTMLButtonElement {
 	id: string
-}
-
-interface DefaultChecklistModel extends checklistModel {
-	isNew: boolean
 }
 
 export class CheckListManager extends React.Component<checklistProps, any> {
@@ -142,7 +138,7 @@ function getNextId(checklists: checklistStateModel): number {
 function mapStateToProps(state: stateModel, ownProps: checklistProps): {checklist: checklistModel, newChecklistId?: number} {
 	const checklistId = parseInt(ownProps.match.params.id, 10);
 	let newChecklistId,
-		defaultChecklist: DefaultChecklistModel = {
+		defaultChecklist: checklistModel = {
 			id: 1,
 			title: '',
 			items: [],
