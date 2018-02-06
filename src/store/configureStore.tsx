@@ -1,11 +1,11 @@
-import {createStore, applyMiddleware} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import {stateModel} from '../interfaces';
+import { StateModel } from '../interfaces';
 
-export default function configureStore(initialState: stateModel) {
+export default function configureStore(initialState: StateModel) {
     return createStore(
         rootReducer,
         initialState,

@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './all-checklists.css';
-import {checklistModel, stateModel} from '../../interfaces';
+import { ChecklistModel, StateModel } from '../../interfaces';
 
-type ListModel = {list: checklistModel[]}
+type ListModel = {list: ChecklistModel[]};
 
 export const AllCheckLists = ({list}: ListModel) => (
     <div className="all-checklists">
         <h1>All checklists</h1>
         <ul className="list-group">
-            {list.map((checklist: any) => {
+            {list.map((checklist: ChecklistModel) => {
                 return (<li className="list-group-item" key={checklist.id}>
                     <Link
                         className="all-checklists-link"
@@ -23,7 +23,7 @@ export const AllCheckLists = ({list}: ListModel) => (
     </div>
 );
 
-function mapStateToProps(state: stateModel): ListModel {
+function mapStateToProps(state: StateModel): ListModel {
     let list = state.checklists;
     return {list};
 }

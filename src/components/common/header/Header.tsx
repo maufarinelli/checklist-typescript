@@ -7,9 +7,9 @@ const Header = () => (
         <nav>
             <ul>
                 <li><Link to="/">Home</Link></li>
-                {" | "}
+                {' | '}
                 <li><Link to="/checklist">Add CheckList</Link></li>
-                {" | "}
+                {' | '}
                 <li><Link to="/list">See All</Link></li>
             </ul>
         </nav>

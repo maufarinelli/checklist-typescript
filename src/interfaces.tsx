@@ -1,15 +1,15 @@
-export interface checklistModel {
+export interface ChecklistModel {
     id: number;
     title: string;
-    items: checklistItemModel[];
+    items: ChecklistItemModel[];
     isNew?: boolean;
 }
 
-export interface stateModel {
-    checklists: checklistModel[];
+export interface StateModel {
+    checklists: ChecklistModel[];
 }
 
-export interface checklistItemModel {
+export interface ChecklistItemModel {
     id: string;
     name: string;
     value: string;
@@ -19,10 +19,10 @@ export interface checklistItemModel {
 
 export interface ActionsChecklist {
     type: string;
-    payload: checklistModel;
+    payload: ChecklistModel;
 }
 
 export interface ActionsChecklists {
     type: string;
-    payload: checklistModel[];
+    payload: ChecklistModel[];
 }

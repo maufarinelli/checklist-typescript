@@ -15,7 +15,7 @@ interface ChecklistItemState {
 }
 
 class ChecklistItem extends React.Component<ChecklistItemProps, ChecklistItemState> {
-    constructor(props: any) {
+    constructor(props: ChecklistItemProps) {
         super(props);
 
         this.state = {

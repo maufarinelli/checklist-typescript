@@ -1,6 +1,6 @@
-import {stateModel} from '../interfaces';
+import { StateModel } from '../interfaces';
 
-const initialState: stateModel = {
+const initialState: StateModel = {
     checklists: []
 };
 

@@ -1,7 +1,7 @@
-import { checklistModel } from '../interfaces';
+import { ChecklistModel } from '../interfaces';
 
 const delay: number = 300;
-let allChecklists: checklistModel[] = [
+let allChecklists: ChecklistModel[] = [
     {
         id: 1,
         title: 'Title 1',
@@ -81,16 +81,14 @@ let allChecklists: checklistModel[] = [
 
 export class ChecklistsApi {
     static getAllCourses() {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(allChecklists);
-            }, delay);
+        return new Promise((resolve) => {
+            setTimeout(() => { resolve(allChecklists); }, delay);
         });
     }
 
-    static saveChecklist(checklist: checklistModel) {
+    static saveChecklist(checklist: ChecklistModel) {
         checklist = Object.assign({}, checklist); // to avoid manipulating object passed in.
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             setTimeout(() => {
                 if (checklist.id) {
                     const existingChecklistIndex = allChecklists.findIndex(a => a.id === checklist.id);
