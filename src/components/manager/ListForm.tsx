@@ -11,9 +11,10 @@ interface ListFormProps {
     onDeleteItem: (event: React.FormEvent<HTMLButtonElement>) => void;
     onUpdateTitle: (title: string) => void;
     onCheckboxChange: (event: React.FormEvent<HTMLInputElement>) => void;
+    onSaveChecklist: (event: React.FormEvent<HTMLButtonElement>) => void;
 }
 
-export const ListForm = ({checklist, onAddItem, onDeleteItem, onUpdateTitle, onCheckboxChange}: ListFormProps) => {
+export const ListForm = ({checklist, onAddItem, onDeleteItem, onUpdateTitle, onCheckboxChange, onSaveChecklist}: ListFormProps) => {
     let textInputTitleProps = {
             type: 'horizontal-form',
             id: 'checklist-title',
@@ -46,6 +47,8 @@ export const ListForm = ({checklist, onAddItem, onDeleteItem, onUpdateTitle, onC
                 })}
 
                 <TextInput {...textInputAddItemProps} />
+
+                <button type="button" onClick={onSaveChecklist}>Save</button>
             </form>
         </div>
     );
