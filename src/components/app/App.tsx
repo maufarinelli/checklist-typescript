@@ -19,12 +19,12 @@ class App extends React.Component<Props, object> {
     }
 }
 
-export function mergeProps(stateProps: void, dispatchProps: void, ownProps: object): object {
+export function mergeProps(stateProps: object, dispatchProps: object, ownProps: object): object {
     return Object.assign({}, ownProps, stateProps, dispatchProps);
 }
 
-const mapStateToProps = () => {};
-const mapDispatchToProps = () => {};
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
 
 export default withRouter(
     connect(mapStateToProps, mapDispatchToProps, mergeProps)(App)

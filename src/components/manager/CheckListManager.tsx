@@ -158,9 +158,9 @@ function mapStateToProps(state: StateModel, ownProps: ChecklistProps): {checklis
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<StateModel>): {actions: (checklist: any) => Promise<object>} {
+function mapDispatchToProps(dispatch: Dispatch<StateModel>): {actions: { saveChecklist:(checklist: any) => Promise<object>} } {
     return {
-        actions: bindActionCreators(saveChecklist, dispatch)
+        actions: bindActionCreators({saveChecklist}, dispatch)
     };
 }
 

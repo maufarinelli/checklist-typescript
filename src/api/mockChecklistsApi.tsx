@@ -88,11 +88,12 @@ export class ChecklistsApi {
 
     static saveChecklist(checklist: ChecklistModel) {
         checklist = Object.assign({}, checklist); // to avoid manipulating object passed in.
+        const checklists = [...allChecklists];
         return new Promise((resolve) => {
             setTimeout(() => {
                 if (checklist.id) {
-                    const existingChecklistIndex = allChecklists.findIndex(a => a.id === checklist.id);
-                    allChecklists.splice(existingChecklistIndex, 1, checklist);
+                    const existingChecklistIndex = checklists.findIndex(a => a.id === checklist.id);
+                    checklists.splice(existingChecklistIndex, 1, checklist);
                 }
                 resolve(checklist);
             }, delay);
