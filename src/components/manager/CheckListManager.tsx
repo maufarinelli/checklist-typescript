@@ -47,12 +47,8 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
         this.setState({checklist: nextProps.checklist});
     }
 
-    isNewChecklist(): boolean {
-        return !!this.props.newChecklistId;
-    }
-
     changeRoot(): void {
-        this.props.history.push(`/checklist/${this.props.newChecklistId}`);
+        this.props.history.push(`/list`);
     }
 
     onAddItem(item: ChecklistItemModel): void {
@@ -61,12 +57,6 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
         this.setState(() => ({
             checklist: updatedChecklist
         }));
-
-        // this.props.actions.saveChecklist(updatedChecklist);
-        //
-        // if (this.isNewChecklist()) {
-        //     this.changeRoot();
-        // }
     }
 
     onDeleteItem(event: React.FormEvent<HTMLButtonElementModel>) {
@@ -79,11 +69,6 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
             checklist: updatedChecklist
         }));
 
-        // this.props.actions.saveChecklist(updatedChecklist);
-        // if (this.isNewChecklist()) {
-        //     this.changeRoot();
-        // }
-
         event.preventDefault();
     }
 
@@ -93,11 +78,6 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
         this.setState(() => ({
             checklist: updatedChecklist
         }));
-
-        // this.props.actions.saveChecklist(updatedChecklist);
-        // if (this.isNewChecklist()) {
-        //     this.changeRoot();
-        // }
     }
 
     onCheckboxChange(event: React.FormEvent<HTMLInputElement>) {
@@ -125,12 +105,12 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
         this.setState(() => ({
             checklist: updatedChecklist
         }));
-        // this.props.actions.saveChecklist(updatedChecklist);
     }
 
     onSaveChecklist(event: React.FormEvent<HTMLButtonElement>) {
         const checklistToSave = Object.assign({}, this.state.checklist);
-        this.props.actions.saveChecklist(checklistToSave);
+        this.props.actions.saveChecklist(checklistToSave)
+            .then(this.changeRoot());
     }
 
     render() {

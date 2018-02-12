@@ -1,4 +1,5 @@
 import * as types from '../actions/actionTypes';
+import _ from 'lodash';
 import initialState from './initialState';
 import { ChecklistModel, ActionsChecklist, ActionsChecklists } from '../interfaces';
 
@@ -8,10 +9,9 @@ export function checklistsReducer(state: ChecklistModel[] = initialState.checkli
             return action.payload;
 
         case types.CREATE_CHECKLIST_SUCCESS:
-            //const newId = (state.length > 0) ? state[state.length - 1].id + 1 : 1;
             return [
                 ...state,
-                Object.assign({}, action.payload)
+                Object.assign({}, _.omit(action.payload, 'isNew'))
             ];
 
         case types.UPDATE_CHECKLIST_SUCCESS:
