@@ -40,63 +40,53 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
         this.onDeleteItem = this.onDeleteItem.bind(this);
         this.onUpdateTitle = this.onUpdateTitle.bind(this);
         this.onCheckboxChange = this.onCheckboxChange.bind(this);
+        this.onSaveChecklist = this.onSaveChecklist.bind(this);
     }
 
     componentWillReceiveProps(nextProps: checklist): void {
         this.setState({checklist: nextProps.checklist});
     }
 
-    isNewChecklist(): boolean {
-        return !!this.props.newChecklistId;
-    }
-
     changeRoot(): void {
-        this.props.history.push(`/checklist/${this.props.newChecklistId}`);
+        this.props.history.push(`/list`);
     }
 
     onAddItem(item: ChecklistItemModel): void {
-        let updatedChecklist = Object.assign({}, this.state.checklist, {items: [...this.state.checklist.items, item]});
+        const updatedChecklist = Object.assign({}, this.state.checklist, {items: [...this.state.checklist.items, item]});
+
         this.setState(() => ({
             checklist: updatedChecklist
         }));
-
-        this.props.actions.saveChecklist(updatedChecklist);
-
-        if (this.isNewChecklist()) {
-            this.changeRoot();
-        }
     }
 
     onDeleteItem(event: React.FormEvent<HTMLButtonElementModel>) {
-        let updatedItems = this.state.checklist.items.filter((item: ChecklistItemModel) => {
+        const updatedItems = this.state.checklist.items.filter((item: ChecklistItemModel) => {
             return item.id !== event.currentTarget.id;
         });
+        const updatedChecklist = Object.assign({}, this.state.checklist, {items: updatedItems});
 
-        let updatedChecklist = Object.assign({}, this.state.checklist, {items: updatedItems});
-        this.props.actions.saveChecklist(updatedChecklist);
-
-        if (this.isNewChecklist()) {
-            this.changeRoot();
-        }
+        this.setState(() => ({
+            checklist: updatedChecklist
+        }));
 
         event.preventDefault();
     }
 
     onUpdateTitle(title: string): void {
         let updatedChecklist = Object.assign({}, this.state.checklist, {title: title});
-        this.props.actions.saveChecklist(updatedChecklist);
 
-        if (this.isNewChecklist()) {
-            this.changeRoot();
-        }
+        this.setState(() => ({
+            checklist: updatedChecklist
+        }));
     }
 
     onCheckboxChange(event: React.FormEvent<HTMLInputElement>) {
-        let updatedItems = this.state.checklist.items.map((item: ChecklistItemModel) => {
+        const updatedItems = this.state.checklist.items.map((item: ChecklistItemModel) => {
             if (item.id === event.currentTarget.id) {
                 return {
                     id: item.id,
                     name: item.name,
+                    value: item.value,
                     label: item.label,
                     checked: event.currentTarget.checked
                 };
@@ -104,13 +94,23 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
                 return {
                     id: item.id,
                     name: item.name,
+                    value: item.value,
                     label: item.label,
                     checked: item.checked
                 };
             }
         });
-        let updatedChecklist = Object.assign({}, this.state.checklist, {items: updatedItems});
-        this.props.actions.saveChecklist(updatedChecklist);
+        const updatedChecklist = Object.assign({}, this.state.checklist, {items: updatedItems});
+
+        this.setState(() => ({
+            checklist: updatedChecklist
+        }));
+    }
+
+    onSaveChecklist(event: React.FormEvent<HTMLButtonElement>) {
+        const checklistToSave = Object.assign({}, this.state.checklist);
+        this.props.actions.saveChecklist(checklistToSave)
+            .then(this.changeRoot());
     }
 
     render() {
@@ -121,6 +121,7 @@ export class CheckListManager extends React.Component<ChecklistProps, any> {
                 onDeleteItem={this.onDeleteItem}
                 onUpdateTitle={this.onUpdateTitle}
                 onCheckboxChange={this.onCheckboxChange}
+                onSaveChecklist={this.onSaveChecklist}
             />
         );
     }
